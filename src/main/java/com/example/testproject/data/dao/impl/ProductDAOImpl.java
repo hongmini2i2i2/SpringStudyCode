@@ -1,5 +1,6 @@
 package com.example.testproject.data.dao.impl;
 
+import com.example.testproject.data.dao.ProductDAO;
 import com.example.testproject.data.entity.ProductEntity;
 import com.example.testproject.data.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;

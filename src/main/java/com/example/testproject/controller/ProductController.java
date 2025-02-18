@@ -1,5 +1,7 @@
 package com.example.testproject.controller;
-
+import com.example.testproject.common.exception.AroundHubException;
+import com.example.testproject.common.Constants.ExceptionClass;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.example.testproject.service.ProductService;
@@ -37,11 +39,18 @@ public class ProductController {
 
     // http://localhost:8080/api/v1/product-api/product
     @PostMapping(value = "/product")
-    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto) {
+    //얘는 response status에 바디로 response를 보내기 때문에 타입이 ResponseEntity<ProductDto>
+    public ResponseEntity<ProductDto> createProduct(@Valid @RequestBody ProductDto productDto) {
         String productId = productDto.getProductId();
         String productName = productDto.getProductName();
         int productPrice = productDto.getProductPrice();
         int productStock = productDto.getProductStock();
+
+        // Validation Code Example. 이거를 @Valid로 생략가능.
+        /** if (productDto.getProductId().equals("") || productDto.getProductId().isEmpty()) {
+            LOGGER.error("[createProduct] failed Response :: productId is Empty");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(productDto);
+        } */
 
         ProductDto response = productService.saveProduct(productId, productName, productPrice, productStock);
 
@@ -57,6 +66,11 @@ public class ProductController {
     @DeleteMapping(value = "/product/{productId}")
     public ProductDto deleteProduct(@PathVariable String productId) {
         return null;
+    }
+
+    @PostMapping(value = "/product/exception")
+    public void exceptionTest() throws AroundHubException { //커스텀 Exception.
+        throw new AroundHubException(ExceptionClass.PRODUCT, HttpStatus.BAD_REQUEST, "의도한 에러 발생");
     }
 }
 

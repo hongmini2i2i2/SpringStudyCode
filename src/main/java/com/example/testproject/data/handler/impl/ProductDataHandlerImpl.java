@@ -1,6 +1,6 @@
 package com.example.testproject.data.handler.impl;
 
-import com.example.testproject.data.dao.impl.ProductDAO;
+import com.example.testproject.data.dao.ProductDAO;
 import com.example.testproject.data.entity.ProductEntity;
 import com.example.testproject.data.handler.ProductDataHandler;
 import jakarta.transaction.Transactional;
