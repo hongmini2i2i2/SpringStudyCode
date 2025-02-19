@@ -19,7 +19,8 @@ public class ProductController {
     private final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);//resource에 설정된 로거 겟
     private ProductService productService;
 
-    @Autowired
+    @Autowired //Autowired니까 자동으로 서비스 객체 넣어줌.
+    // (인터페이스를 넣어도 인터페이스 구현체에 Service 어노테이션 있어서 그거 가져와짐.)
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
@@ -59,7 +60,7 @@ public class ProductController {
         //쉼표뒤에 있는거 중괄호 안에 넣기 가능.
         LOGGER.info("[createProduct] Response :: productId = {}, productName = {}, productPrice = {}, productStock = {}",
                 response.getProductId(), response.getProductName(), response.getProductPrice(), response.getProductStock());
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response); //자기 Status 커스텀 하고 싶을때는 이렇게 전달해야함.
     }
 
     // http://localhost:8080/api/v1/product-api/product/{productId}

@@ -35,7 +35,7 @@ public class GetController {
 
     // http://localhost:8080/api/v1/get-api/variable2/{String 값}
     @GetMapping(value = "/variable2/{variable}")
-    public String getVariable2(@PathVariable("variable") String var) {
+    public String getVariable2(@PathVariable("variable") String var) {  //내가 원하는 변수 명으로 받고싶을때.
         return var;
     }
 
